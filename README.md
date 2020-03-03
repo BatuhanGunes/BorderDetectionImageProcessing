@@ -2,6 +2,7 @@
 
 * border detection, bitmap and gray scale operations with c#
 
+English / [Turkish](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/README(english).md)
 
 ### Operations that can be done in the application
 
