@@ -2,6 +2,8 @@
 
 * c # ile sınır algılama, bitmap ve gri tonlama işlemleri
 
+[English](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/README.md) / Turkish
+
 
 ### Uygulamada yapılabilecek işlemler
 
