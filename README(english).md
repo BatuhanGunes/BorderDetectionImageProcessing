@@ -1,20 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Emgu.CV;
-using Emgu.CV.Structure;
+# BorderDetectionImageProcessing
 
-namespace imageOperations
-{
-    public partial class Form1 : Form
-    {
+* c # ile sınır algılama, bitmap ve gri tonlama işlemleri
 
+
+### Uygulamada yapılabilecek işlemler
+
+- Fotoğraf yükleme
+- Resim çözünürlüğüne bakma
+- sınır tespiti
+- görüntü gri skalasını ayarlama
+- görüntü bitmap'ini ayarlama
+
+### Ekran Görüntüleri
+
+![Screenshot](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/Screenshot2.png)
+
+### Kod
+
+```javascript
+      
         Bitmap bmp = new Bitmap(800, 500);
 
         public Form1()
@@ -168,7 +172,4 @@ namespace imageOperations
                 this.Refresh();
             }
         }
-    }
-}
-//  Batuhan Güneş  
-//  201513171055
+```
