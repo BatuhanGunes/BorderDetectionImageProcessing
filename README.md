@@ -1,176 +1,40 @@
-# BorderDetectionImageProcessing
+**Language :** English / [Turkish](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/README(Turkish).md)
 
-* border detection, bitmap and gray scale operations with c#
+# Image Operations
 
-English / [Turkish](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/README(english).md)
+In this program prepared in C #, various operations can be performed with pictures. The operations you can do with the picture in the program are as follows;
+- Upload an image
+- Border (Edge) detection
+- Adjust the image grayscale
+- Setting the image bitmap
 
-### Operations that can be done in the application
+`
+Project creation date: October 2019
+`
 
-- Image upload
-- See picture resolution
-- border detection
-- set image gray scale
-- set image bitmap
+## Screenshots
 
-### Screenshots
+<img align="center" src="https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/Screenshot2.png"> 
 
-![Screenshot](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/Screenshot2.png)
+## Getting Started
 
-### code
+Download a copy of the project files to your local machine to run the project. After obtaining the required environments, you can open the project in this environment run it and use the application through the window that opens after it is run. When trying to run a second time, simply run ~\imageOperations\bin\Debug\imageOperations.exe in the location of the project.
 
-```javascript
-      
-        Bitmap bmp = new Bitmap(800, 500);
+### Prerequisites
 
-        public Form1()
-        {
-            InitializeComponent();
-        }
+- Microsoft Visual Studio 
 
+To run the project, you must first obtain any version of Microsoft Visual Studio software that has the C # IDE for your system from [Microsoft Visual Studio](https://visualstudio.microsoft.com/) and install it on your local machine. Then, it will be enough to introduce our project to IDE environment and perform debug operation. If you do not want to download a program, you can run the project at [Microsoft Visual Studio Online](https://visualstudio.microsoft.com/en/services/visual-studio-online/).
 
-        private void buttonExit_Click(object sender, EventArgs e)
-        {
-            Environment.Exit(0);    //TurnOff Aplication
-        }
+## Authors
 
-        private void buttonUploadImage_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                openFileDialog1.ShowDialog();
-                pictureBox.ImageLocation = openFileDialog1.FileName;
-                bmp = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);
-                textBoxFileName.Text = openFileDialog1.FileName;
-                labelResolution.Text = pictureBox.Height.ToString() + " X " + pictureBox.Width.ToString();
+* **Batuhan Güneş**  - [BatuhanGunes](https://github.com/BatuhanGunes)
 
-                this.Refresh();
-            }
-            catch
-            {
-                MessageBox.Show("Please add a photo", "information");
-            }
-        }
+See also the list of [contributors](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the Apache License - see the [LICENSE.md](https://github.com/BatuhanGunes/BorderDetectionImageProcessing/blob/master/LICENSE) file for details.
 
 
-        private void buttonGrayScale_Click(object sender, EventArgs e)
-        {
-            if (bmp != null)
-            {
-                // bmp refresh
-                bmp = (Bitmap)Bitmap.FromFile(textBoxFileName.Text);
 
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    for (int x = 0; x < bmp.Width; x++)
-                    {
-                        Color c = bmp.GetPixel(x, y);
-
-                        int r = c.R;
-                        int g = c.G;
-                        int b = c.B;
-                        int avg = (r + g + b) / 3;
-                        bmp.SetPixel(x, y, Color.FromArgb(avg, avg, avg));
-                    }
-                }
-                pictureBox.Image = bmp;
-                this.Refresh();
-            }
-        }
-
-        private void buttonBitmap_Click(object sender, EventArgs e)
-        {
-            if (bmp != null)
-            {
-                // bmp refresh
-                bmp = (Bitmap)Bitmap.FromFile(textBoxFileName.Text);
-                int treshold = Convert.ToInt32(numericTreshold2.Text);
-                
-
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    for (int x = 0; x < bmp.Width; x++)
-                    {
-                        Color c = bmp.GetPixel(x, y);
-
-                        int r = c.R;
-                        int g = c.G;
-                        int b = c.B;
-                        int avg = (r + g + b) / 3;
-
-                        if (avg >= treshold)
-                        {
-                            bmp.SetPixel(x, y, Color.FromArgb(255, 255, 255));
-                        }
-                        else
-                        {
-                            bmp.SetPixel(x, y, Color.FromArgb(0, 0, 0));
-                        }
-                    }
-                }
-                pictureBox.Image = bmp;
-                this.Refresh();
-            }       
-        }
-
-
-        private void buttonReset_Click(object sender, EventArgs e)
-        {
-            if (bmp != null)
-            {
-                bmp = (Bitmap)Bitmap.FromFile(textBoxFileName.Text);
-                pictureBox.Image = bmp;
-                this.Refresh();
-            }
-        }
-        
-        private void buttonBorderDetection_Click(object sender, EventArgs e)
-        {
-            if (bmp != null)
-            {
-
-                int treshold = Convert.ToInt32(numericTreshold.Text);
-                int[,] IpikselXY = new int[bmp.Width, bmp.Height];
-                // bmp refresh
-                bmp = (Bitmap)Bitmap.FromFile(textBoxFileName.Text);
-
-                // Gray Scale
-                for (int y = 0; y < bmp.Height; y++)
-                {
-                    for (int x = 0; x < bmp.Width; x++)
-                    {
-                        Color c = bmp.GetPixel(x, y);
-
-                        int r = c.R;
-                        int g = c.G;
-                        int b = c.B;
-                        int avg = (r + g + b) / 3;
-                        IpikselXY[x, y] = avg;
-                    }
-                }
-
-                //Object Detection
-                for (int y = 1; y < bmp.Height - 1; y++)
-                {
-                    for (int x = 1; x < bmp.Width - 1; x++)
-                    {
-
-                        int IpikselX = (IpikselXY[(x + 1), y] - IpikselXY[(x - 1), y]) / 2;
-                        int IpikselY = (IpikselXY[x, (y + 1)] - IpikselXY[x, (y - 1)]) / 2;
-                        int IpikselGradient = Convert.ToInt32(Math.Sqrt(Math.Pow(IpikselX, 2) + Math.Pow(IpikselY, 2)));
-
-                        if (IpikselGradient >= treshold)
-                        {
-                            bmp.SetPixel(x, y, Color.FromArgb(255, 255, 255));
-                        }
-                        else
-                        {
-                            bmp.SetPixel(x, y, Color.FromArgb(0, 0, 0));
-                        }
-                    }
-                }
-
-                pictureBox.Image = bmp;
-                this.Refresh();
-            }
-        }
-```
